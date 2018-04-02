@@ -2,13 +2,13 @@ function Game(canvasId) {
   this.canvas = document.getElementById(canvasId);
   this.ctx = this.canvas.getContext("2d");
   this.background = new Background(this);
-
   this.reset();
 }
 
 Game.prototype.start = function() {
   setInterval (function() {
     this.draw();
+    this.moveAll()
   }.bind(this), 30);
 }
 
@@ -27,6 +27,7 @@ Game.prototype.gameOver = function() {
 
 Game.prototype.reset = function() {
   this.background = new Background(this);
+  this.player = new Player(this);
 
 };
 
@@ -44,6 +45,9 @@ Game.prototype.clear = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
+  this.background.drawGrid();
+  this.background.border();
+  this.player.draw();
 };
 
 Game.prototype.moveAll = function() {
