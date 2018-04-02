@@ -13,10 +13,12 @@
   color: gold;
   background-image: url("../images/mine_tunnel.png") ;
   background-repeat: no-repeat;
-  background-size:80em;
+  background-size:70em;
   background-position-x: 50%; 
-  background-position-y: 30%;
+  background-position-y: 40%;
   display:flex;
-  align-items: center;
-  justify-content: center;
+  align-content:center;
+  align-items:center;
+  justify-content:center;
+  flex-direction: column;
 }

@@ -1,5 +1,10 @@
 function Score (game){
-  this.game = game;
-  this.point = 0;
+}
 
+Score.prototype.incrementScore = function(){
+
+}
+
+Score.prototype.draw = function(){
+  
 }
