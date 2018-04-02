@@ -1,6 +1,6 @@
 function Player(game){
-  this.x = 1;
-  this.y = 1;
+  this.x = 50;
+  this.y = 40;
   this.game = game;
   
 
@@ -8,15 +8,18 @@ function Player(game){
   this.height = 50;
 
   this.img = new Image();
-  this.img.src = "images/sprites.png";
+  this.img.src = "images/player.png";
+  this.img.frames = 3;
+  this.img.frameIndex = 1;
 }
 
 Player.prototype.draw = function() {
   this.game.ctx.drawImage(
     this.img,
-    this.img.frameIndex * (this.img.width /this.img.frames),
+    this.img.frameIndex * (this.img.width / this.img.frames),
     0,
     this.img.width / this.img.frames,
+    this.img.height,
     this.x,
     this.y,
     this.width,

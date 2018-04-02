@@ -39,12 +39,22 @@ Background.prototype.drawGrid = function() {
   }
   };
 
-Background.prototype.border = function(){
+Background.prototype.drawBorder = function(){
   var w = this.game.canvas.width;
   var h = this.game.canvas.height;
 
   for (y=0;y<=h;y+=40){
-    this.game.ctx.drawImage(this.imgeGrid,x,y,40,40);
+    this.game.ctx.drawImage(this.imgeGrid,0,y,40,40);
   }
+  for (z=0;z<=h;z+=40){
+    this.game.ctx.drawImage(this.imgeGrid,this.game.canvas.width-40,z,40,40);
+  }
+  for (r=0;r<=w;r+=40){
+    this.game.ctx.drawImage(this.imgeGrid,r,0,40,40);
+  }
+  for (r=0;r<=w;r+=40){
+    this.game.ctx.drawImage(this.imgeGrid,r,this.game.canvas.height-40,40,40);
+  }
+  
 }
   

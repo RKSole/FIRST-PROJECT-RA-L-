@@ -46,7 +46,7 @@ Game.prototype.clear = function() {
 Game.prototype.draw = function() {
   this.background.draw();
   this.background.drawGrid();
-  this.background.border();
+  this.background.drawBorder();
   this.player.draw();
 };
 
