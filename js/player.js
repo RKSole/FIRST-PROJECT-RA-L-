@@ -1,12 +1,11 @@
-function Player(game) {
-  this.x = 42;
+function Player(game){
+  this.x = 40;
   this.y = 45;
   this.game = game;
 
   this.vy = 40;
   this.vx = 40;
-  this.lastx = 0;
-  this.lasty = 0;
+
   this.width = 35;
   this.height = 35;
 
@@ -28,52 +27,56 @@ Player.prototype.draw = function() {
     this.y,
     this.width,
     this.height
-  );
+  )
 };
 
 Player.prototype.setListeners = function() {
-  document.onkeydown = function(e) {
-    switch (e.keyCode) {
-      case 38:
-        if (this.y < 42) {
-          this.y = 45;
-          this.vy = 0;
-        } else {
-          //this.lasty = this.y
-          this.y -= this.vy;
-        }
-        break;
-      case 40:
-        if (this.y > this.game.canvas.height - 42) {
-          this.y = this.game.canvas.height - 45;
-          this.vy = 0;
-        } else {
-          //this.lasty = this.y
-          this.y += this.vy;
-        }
-        break;
-      case 37:
-        if (this.x < 42) {
-          this.x = 42;
-          this.vx = 0;
-        } else {
-          // this.lastx = this.x
-          this.x -= this.vx;
-        }
-        break;
-      case 39:
-        if (this.x > this.game.canvas.width - 42) {
-          this.x = this.game.canvas.width - 42;
-          this.vx = 0;
-        } else {
-          //this.lastx = this.x
-          this.x += this.vx;
-        }
-        break;
+ document.onkeydown = function(e){
+  switch (e.keyCode) {
+    case 38:
+    if (this.y < 82){
+    this.vy === 0;
+    return;
+    }else{
+    this.y -= this.vy;
     }
-  }.bind(this);
+    break;
+
+    case 40:
+    if (this.y >= this.game.canvas.height-82){
+      this.vy === 0;
+      return;
+    }else{
+      this.y += this.vy;
+    }
+    break;
+
+    case 37:
+    if (this.x < 42){
+      this.vx === 0;
+      return;
+    }else {
+      this.x -= this.vx;
+    }
+    break;
+
+    case 39:
+    if (this.x >= this.game.canvas.width-82){
+      return;
+      this.vx === 0;
+    }else{
+    this.x += this.vx;
+    }
+    break;
+
+    }
+  }.bind(this)
+}
+
+Player.prototype.animateImg = function() {
+
 };
 
-Player.prototype.animateImg = function() {};
+Player.prototype.move = function() {
 
-Player.prototype.move = function() {};
+};

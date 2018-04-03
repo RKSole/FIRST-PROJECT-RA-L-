@@ -12,6 +12,9 @@ function Background(game) {
   this.imgGrid.src = "images/vLLgDyu.png";
   this.imgeGrid = new Image();
   this.imgeGrid.src = "images/Brick_Block.png";
+  this.sandBlocks = [];
+  this.createSand();
+
 }
 
 
@@ -28,16 +31,24 @@ Background.prototype.move = function() {
   if (this.x < -this.game.canvas.width) this.x = 0;
 };
 
-Background.prototype.drawGrid = function() {
+
+Background.prototype.createSand = function(){
   var w = this.game.canvas.width;
   var h = this.game.canvas.height;
 
-  for (x=0;x<=w;x+=40) {
-      for (y=0;y<=h;y+=40) {
-        this.game.ctx.drawImage(this.imgGrid,x,y,40,40);
+  for (x=40;x<=w-40;x+=40) {
+      for (y=40;y<=h-40;y+=40) {
+        this.sandBlocks.push({"x":x,"y":y});
       }
   }
   };
+
+
+Background.prototype.drawGrid = function() {
+  for (i=0;i<this.sandBlocks.length;i++){
+    this.game.ctx.drawImage(this.imgGrid,this.sandBlocks[i].x,this.sandBlocks[i].y,40,40)
+  }
+      };
 
 Background.prototype.drawBorder = function(){
   var w = this.game.canvas.width;
@@ -57,19 +68,20 @@ Background.prototype.drawBorder = function(){
   }
   
 }
-  
-Background.prorotype.isCollision = function() {
-  var player = this.game.player;
-  for (i=0; i < this.listObstacles.length; i++){
-    if (
-      player.x < this.listObstacles[i][0] + this.listObstacles[i][2] && 
-      player.x + player.img.width > this.listObstacles[i][0] && 
-      player.y < this.listObstacles[i][1] + this.listObstacles[i][3] && 
-      player.y + player.img.width > this.listObstacles[i][1]
-      
-    ) {
-    return true;
 
-    } 
-  } 
-}
+  
+// Background.prorotype.isCollision = function() {
+//   var player = this.game.player;
+//   for (i=0; i < this.listObstacles.length; i++){
+//     if (
+//       player.x < this.listObstacles[i][0] + this.listObstacles[i][2] && 
+//       player.x + player.img.width > this.listObstacles[i][0] && 
+//       player.y < this.listObstacles[i][1] + this.listObstacles[i][3] && 
+//       player.y + player.img.width > this.listObstacles[i][1]
+      
+//     ) {
+//     return true;
+
+//     } 
+//   } 
+// }
