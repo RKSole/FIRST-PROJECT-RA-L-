@@ -22,17 +22,21 @@ function Background(game) {
 
   this.gridX = 34;
   this.gridY = 16;
-  this.arrObs = [[Math.ceil(Math.random()*(this.gridX-1)), Math.ceil(Math.random()*(this.gridY-1))]];
+  this.arrObs = [
+    [
+      Math.ceil(Math.random() * (this.gridX - 2) + 1),
+      Math.ceil(Math.random() * (this.gridY - 2) + 1)
+    ]
+  ];
   this.numMines = 30;
   this.numGems = 50;
   this.numRocks = 150;
   this.numObs = this.numMines + this.numGems + this.numRocks;
-  
+
   this.rockBlocks = [];
   this.gemBlocks = [];
   this.mineBlocks = [];
   this.createAll();
- 
 }
 
 Background.prototype.draw = function() {
@@ -62,25 +66,23 @@ Background.prototype.createSand = function() {
   }
 };
 
-
 Background.prototype.createAll = function() {
-  var x,y;
+  var x, y;
   while (this.arrObs.length < this.numObs) {
-    x = Math.ceil(Math.random()*(this.gridX-1));
-    y = Math.ceil(Math.random()*(this.gridY-1));
-    this.arrObs.push([x,y]);
-    for (var i = 0; i < this.arrObs.length-1 ; i++ ) {
-      if (this.arrObs[i][0] === x && this.arrObs[i][1] === y) {
+    x = Math.ceil(Math.random() * (this.gridX - 1));
+    y = Math.ceil(Math.random() * (this.gridY - 1));
+    this.arrObs.push([x, y]);
+    for (var i = 0; i < this.arrObs.length - 1; i++) {
+      if ((this.arrObs[i][0] === x && this.arrObs[i][1] === y) || (x===0 && y ===0)) {
         this.arrObs.pop();
         break;
       }
     }
   }
-  this.rockBlocks = this.arrObs.splice(0,this.numRocks);
-  this.gemBlocks = this.arrObs.splice(0,this.numGems);
-  this.mineBlocks = this.arrObs.splice(0,this.numMines);
-}
-
+  this.rockBlocks = this.arrObs.splice(0, this.numRocks);
+  this.gemBlocks = this.arrObs.splice(0, this.numGems);
+  this.mineBlocks = this.arrObs.splice(0, this.numMines);
+};
 
 Background.prototype.drawGrid = function() {
   for (i = 0; i < this.sandBlocks.length; i++) {
@@ -146,7 +148,7 @@ Background.prototype.drawBorder = function() {
   }
 };
 
-// Background.prorotype.isCollision = function() {
+// Background.prototype.isCollision = function() {
 //   var player = this.game.player;
 //   for (i=0; i < this.listObstacles.length; i++){
 //     if (
