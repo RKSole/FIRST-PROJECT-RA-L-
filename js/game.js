@@ -6,20 +6,22 @@ function Game(canvasId) {
 }
 
 Game.prototype.start = function() {
-  setInterval (function() {
-    this.draw();
-    this.moveAll()
-  }.bind(this), 30);
-}
-
+  setInterval(
+    function() {
+      this.draw();
+      this.moveAll();
+    }.bind(this),
+    30
+  );
+};
 
 Game.prototype.stop = function() {
-  clearInterval(this.interval)
+  clearInterval(this.interval);
 };
 
 Game.prototype.gameOver = function() {
   this.stop();
-  if(confirm("GAME OVER. Play again?")) {
+  if (confirm("GAME OVER. Play again?")) {
     this.reset();
     this.start();
   }
@@ -28,20 +30,15 @@ Game.prototype.gameOver = function() {
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
-
 };
 
-Game.prototype.isCollision = function() {
-};
+Game.prototype.isCollision = function() {};
 
-Game.prototype.clearObstacles = function() {
-};
+Game.prototype.clearObstacles = function() {};
 
-Game.prototype.generateObstacle = function() {
-};
+Game.prototype.generateObstacle = function() {};
 
-Game.prototype.clear = function() {
-};
+Game.prototype.clear = function() {};
 
 Game.prototype.draw = function() {
   this.background.draw();
@@ -51,6 +48,6 @@ Game.prototype.draw = function() {
 };
 
 Game.prototype.moveAll = function() {
-  this.background.move()
-  this.player.move()
+  this.background.move();
+  this.player.move();
 };

@@ -12,19 +12,27 @@ function Background(game) {
   this.imgeGrid = new Image();
   this.imgeGrid.src = "images/Brick_Block.png";
   this.imgeRock = new Image();
-  this.imgeRock.src = "images/rocks_rotated.png";
+  this.imgeRock.src = "images/Rock.png";
   this.imgeGem = new Image();
   this.imgeGem.src = "images/pink-diamond-1056757_640.png";
   this.imgeMine = new Image();
   this.imgeMine.src = "images/Mine.png";
   this.sandBlocks = [];
   this.createSand();
-  this.rockBlocks = [[5,5],[22,4]];
-  //this.createAll();
-  this.gemBlocks = [[8,14],[31,9]];
-  //this.createGem();
-  this.mineBlocks = [[6,6],[7,7],[13,9],[14,9],[14,10],[19,6],[19,5],[20,6],[22,14],[22,15],[23,13],[34,9],[34,10],[4,16],[5,16],[6,16],[29,14],[28,14],[28,13],[30,1]];
-  //this.createMine();
+
+  this.gridX = 34;
+  this.gridY = 16;
+  this.arrObs = [[Math.ceil(Math.random()*(this.gridX-1)), Math.ceil(Math.random()*(this.gridY-1))]];
+  this.numMines = 30;
+  this.numGems = 50;
+  this.numRocks = 150;
+  this.numObs = this.numMines + this.numGems + this.numRocks;
+  
+  this.rockBlocks = [];
+  this.gemBlocks = [];
+  this.mineBlocks = [];
+  this.createAll();
+ 
 }
 
 Background.prototype.draw = function() {
@@ -54,7 +62,25 @@ Background.prototype.createSand = function() {
   }
 };
 
-//Mines[6,6],[7,7],[13,9],[14,9][14,10],[19,6],[19,5],[20,6],[22,14],[22,15],[23,13],[34,9],[34,10],[4,16],[5,16],[6,16],[29,14],[28,14],[28,13],[30,1];
+
+Background.prototype.createAll = function() {
+  var x,y;
+  while (this.arrObs.length < this.numObs) {
+    x = Math.ceil(Math.random()*(this.gridX-1));
+    y = Math.ceil(Math.random()*(this.gridY-1));
+    this.arrObs.push([x,y]);
+    for (var i = 0; i < this.arrObs.length-1 ; i++ ) {
+      if (this.arrObs[i][0] === x && this.arrObs[i][1] === y) {
+        this.arrObs.pop();
+        break;
+      }
+    }
+  }
+  this.rockBlocks = this.arrObs.splice(0,this.numRocks);
+  this.gemBlocks = this.arrObs.splice(0,this.numGems);
+  this.mineBlocks = this.arrObs.splice(0,this.numMines);
+}
+
 
 Background.prototype.drawGrid = function() {
   for (i = 0; i < this.sandBlocks.length; i++) {
@@ -69,30 +95,24 @@ Background.prototype.drawGrid = function() {
   for (i = 0; i < this.rockBlocks.length; i++) {
     this.game.ctx.drawImage(
       this.imgeRock,
-      this.rockBlocks[i][0]*40,
-      this.rockBlocks[i][1]*40,
-      45,
+      this.rockBlocks[i][0] * 40,
+      this.rockBlocks[i][1] * 40,
+      35,
       45
     );
   }
   for (i = 0; i < this.gemBlocks.length; i++) {
     this.game.ctx.drawImage(
       this.imgeGem,
-      this.gemBlocks[i][0]*40,
-      this.gemBlocks[i][1]*40,
-      45,
-      45
+      this.gemBlocks[i][0] * 40,
+      this.gemBlocks[i][1] * 40,
+      40,
+      40
     );
   }
   for (var j = 0; j < this.mineBlocks.length; j++) {
     var x = this.mineBlocks[j];
-    this.game.ctx.drawImage(
-      this.imgeMine,
-      x[0]*40,
-      x[1]*40,
-      40,
-      40
-    );
+    this.game.ctx.drawImage(this.imgeMine, x[0] * 40, x[1] * 40, 40, 40);
   }
 };
 
