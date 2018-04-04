@@ -74,5 +74,4 @@ Player.prototype.setListeners = function() {
 Player.prototype.animateImg = function() {};
 
 Player.prototype.move = function() {
-if 
 };

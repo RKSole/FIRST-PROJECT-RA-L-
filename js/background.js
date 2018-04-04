@@ -147,19 +147,3 @@ Background.prototype.drawBorder = function() {
     );
   }
 };
-
-// Background.prototype.isCollision = function() {
-//   var player = this.game.player;
-//   for (i=0; i < this.listObstacles.length; i++){
-//     if (
-//       player.x < this.listObstacles[i][0] + this.listObstacles[i][2] &&
-//       player.x + player.img.width > this.listObstacles[i][0] &&
-//       player.y < this.listObstacles[i][1] + this.listObstacles[i][3] &&
-//       player.y + player.img.width > this.listObstacles[i][1]
-
-//     ) {
-//     return true;
-
-//     }
-//   }
-// }
