@@ -12,7 +12,7 @@ function Background(game) {
   this.imgeGrid = new Image();
   this.imgeGrid.src = "images/Brick_Block.png";
   this.imgeRock = new Image();
-  this.imgeRock.src = "images/Rock.png";
+  this.imgeRock.src = "images/Dq6ZD3l.png";
   this.imgeGem = new Image();
   this.imgeGem.src = "images/pink-diamond-1056757_640.png";
   this.imgeMine = new Image();
@@ -98,7 +98,7 @@ Background.prototype.drawGrid = function() {
       this.rockBlocks[i][0] * 40,
       this.rockBlocks[i][1] * 40,
       35,
-      45
+      35
     );
   }
   for (i = 0; i < this.gemBlocks.length; i++) {

@@ -1,6 +1,6 @@
 function Player(game) {
   this.x = 40;
-  this.y = 45;
+  this.y = 42;
   this.game = game;
 
   this.vy = 40;
