@@ -11,7 +11,7 @@ Score.prototype.incrementScore = function(){
 }
 
 Score.prototype.draw = function () {
-  this.game.ctx.font = "40px sans-serif",
-  this.game.ctx.fillText("Score: " + this.point, 3, 33);
-  this.game.ctx.fillStyle = "gold"
+  this.game.ctx.font = "30px Nosifer",
+  this.game.ctx.fillText("Score: " + this.point, 5, 26);
+  this.game.ctx.fillStyle = "white"
 };

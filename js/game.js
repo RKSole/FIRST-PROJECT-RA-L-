@@ -2,6 +2,8 @@ function Game(canvasId) {
   this.canvas = document.getElementById(canvasId);
   this.ctx = this.canvas.getContext("2d");
   this.background = new Background(this);
+  this.player;
+  this.score;
   this.reset();
 }
 
@@ -33,13 +35,21 @@ Game.prototype.reset = function() {
   this.score = new Score(this)
 };
 
-Game.prototype.isCollision = function() {
-  return this.obstacles.some(function (o) {
-    return (this.player.x + this.player.width > o.x) &&
-      (o.x + o.width > this.player.x) && 
-      (this.player.y + this.player.height > o.y)
-  }.bind(this))
-};
+Game.prototype.checkIfCollision = function() {
+  var arr = this.background.rockBlocks;
+ 
+  for (var i = 0; i< arr.length; i++) {
+      if (
+      this.player.x < arr[i][0] + arr[i].width &&
+      this.player.x + this.player.width > arr[i][0] &&
+      this.player.y < arr[i][1] + arr[i].height &&
+      this.player.height + this.player.y > arr[i][1]
+  ) {
+    console.log("hola")
+      }
+
+  }
+}
 
 Game.prototype.draw = function() {
   this.background.draw();
