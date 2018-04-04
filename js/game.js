@@ -6,9 +6,26 @@ function Game(canvasId) {
   this.obstacle = new Obstacle(this);
   this.player;
   this.score;
-
+  
   this.reset();
   
+}
+
+Game.prototype.checkIfCollision = function() {
+  var arr = this.obstacle.rockBlocks;
+ 
+  for (var i = 0; i< arr.length; i++) {
+      if (
+      this.player.x < arr[i][0] + 40 &&
+      this.player.x + this.player.width > arr[i][0] &&
+      this.player.y < arr[i][1] + 40 &&
+      this.player.height + this.player.y > arr[i][1]
+  ) {
+    
+    //console.log("hola")
+      }
+
+  }
 }
 
 Game.prototype.start = function() {
@@ -16,6 +33,7 @@ Game.prototype.start = function() {
     function() {
       this.moveAll();
       this.draw();
+      this.checkIfCollision();
     }.bind(this),
     30
   );
@@ -38,22 +56,6 @@ Game.prototype.reset = function() {
   this.player = new Player(this);
   this.score = new Score(this)
 };
-
-Game.prototype.checkIfCollision = function() {
-  var arr = this.background.rockBlocks;
- 
-  for (var i = 0; i< arr.length; i++) {
-      if (
-      this.player.x < arr[i][0] + arr[i] &&
-      this.player.x + this.player.width > arr[i][0] &&
-      this.player.y < arr[i][1] + arr[i] &&
-      this.player.height + this.player.y > arr[i][1]
-  ) {
-    console.log("hola")
-      }
-
-  }
-}
 
 Game.prototype.draw = function() {
   this.background.draw();
