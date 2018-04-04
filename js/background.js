@@ -20,12 +20,12 @@ function Background(game) {
   this.sandBlocks = [];
   this.createSand();
 
-  this.gridX = 34;
+  this.gridX = 33;
   this.gridY = 16;
   this.arrObs = [
     [
-      Math.ceil(Math.random() * (this.gridX - 2) + 1),
-      Math.ceil(Math.random() * (this.gridY - 2) + 1)
+      Math.ceil(Math.random() * (this.gridX - 1)),
+      Math.ceil(Math.random() * (this.gridY - 1))
     ]
   ];
   this.numMines = 30;
@@ -72,8 +72,10 @@ Background.prototype.createAll = function() {
     x = Math.ceil(Math.random() * (this.gridX - 1));
     y = Math.ceil(Math.random() * (this.gridY - 1));
     this.arrObs.push([x, y]);
+    console.log(x,y)
     for (var i = 0; i < this.arrObs.length - 1; i++) {
-      if ((this.arrObs[i][0] === x && this.arrObs[i][1] === y) || (x===0 && y ===0)) {
+      if ((this.arrObs[i][0] === x && this.arrObs[i][1] === y) || (x=== 1 && y === 1)) {
+        console.log(x,y)
         this.arrObs.pop();
         break;
       }
