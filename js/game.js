@@ -1,17 +1,21 @@
 function Game(canvasId) {
   this.canvas = document.getElementById(canvasId);
   this.ctx = this.canvas.getContext("2d");
+  this.interval;
   this.background = new Background(this);
+  this.obstacle = new Obstacle(this);
   this.player;
   this.score;
+
   this.reset();
+  
 }
 
 Game.prototype.start = function() {
-  setInterval(
+  this.interval = setInterval(
     function() {
-      this.draw();
       this.moveAll();
+      this.draw();
     }.bind(this),
     30
   );
@@ -40,9 +44,9 @@ Game.prototype.checkIfCollision = function() {
  
   for (var i = 0; i< arr.length; i++) {
       if (
-      this.player.x < arr[i][0] + arr[i].width &&
+      this.player.x < arr[i][0] + arr[i] &&
       this.player.x + this.player.width > arr[i][0] &&
-      this.player.y < arr[i][1] + arr[i].height &&
+      this.player.y < arr[i][1] + arr[i] &&
       this.player.height + this.player.y > arr[i][1]
   ) {
     console.log("hola")
@@ -53,13 +57,12 @@ Game.prototype.checkIfCollision = function() {
 
 Game.prototype.draw = function() {
   this.background.draw();
-  this.background.drawGrid();
+  this.obstacle.drawGrid();
   this.background.drawBorder();
   this.player.draw();
   this.score.draw();
 };
 
 Game.prototype.moveAll = function() {
-  this.background.move();
   this.player.move();
 };
