@@ -11,22 +11,23 @@ function Game(canvasId) {
   
 }
 
-Game.prototype.checkIfCollision = function() {
-  var arr = this.obstacle.rockBlocks;
+Game.prototype.checkIfCollision = function(x, y, typeObs) {
+  var arr = this.obstacle.numObs;
+  var collision = false;
  
   for (var i = 0; i< arr.length; i++) {
       if (
-      this.player.x < arr[i][0] + 40 &&
-      this.player.x + this.player.width > arr[i][0] &&
-      this.player.y < arr[i][1] + 40 &&
-      this.player.height + this.player.y > arr[i][1]
-  ) {
-    
-    //console.log("hola")
+      x < arr[i][0]*40 + 40 &&
+      x + 40 > arr [i][0]*40 &&
+      y < arr[i][1]*40 + 40 &&
+      40 + y > arr[i][1]*40) 
+      {
+        collision = true
       }
-
-  }
+   }
+    return collision;
 }
+
 
 Game.prototype.start = function() {
   this.interval = setInterval(

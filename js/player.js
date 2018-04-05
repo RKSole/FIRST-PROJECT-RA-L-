@@ -1,6 +1,6 @@
 function Player(game) {
   this.x = 40;
-  this.y = 42;
+  this.y = 40;
   this.game = game;
 
   this.v = 40;
@@ -33,38 +33,39 @@ Player.prototype.setListeners = function() {
   document.onkeydown = function(e) {
     switch (e.keyCode) {
       case 38:
-        if (this.y < 82) {
-          this.v === 0;
+        if (this.y < 42) {
+          this.y = 40;
           return;
         } else {
-          this.y -= this.v;
+          this.move("y",-1);
         }
         break;
 
       case 40:
         if (this.y >= this.game.canvas.height - 82) {
-          this.v === 0;
+          this.y =this.game.canvas.height - 80;
           return;
         } else {
-          this.y += this.v;
+          this.move("y", 1);
+      
         }
         break;
 
       case 37:
         if (this.x < 42) {
-          this.x === 0;
+          this.x = 40;
           return;
         } else {
-          this.x -= this.v;
+          this.move("x",-1);
         }
         break;
 
       case 39:
         if (this.x >= this.game.canvas.width - 82) {
-          this.x === 0;
+          this.x = this.game.canvas.width - 80;
           return;
         } else {
-          this.x += this.v;
+          this.move("x", 1)
         }
         break;
     }
@@ -73,5 +74,17 @@ Player.prototype.setListeners = function() {
 
 Player.prototype.animateImg = function() {};
 
-Player.prototype.move = function() {
+Player.prototype.move = function(coor,v) {
+  var x = this.x;
+  var y = this.y;
+  if (coor === 'x') x += v*this.v;
+  if (coor === 'y') y += v*this.v; 
+  // console.log(x,y);
+  if (!this.game.checkIfCollision(x, y, this.game.obstacle.rockBlocks)) {
+    if (coor === 'x') this.x += v*this.v;
+    if (coor === 'y') this.y += v*this.v; 
+  }
+  else {
+    console.log('collision')
+  }
 };
