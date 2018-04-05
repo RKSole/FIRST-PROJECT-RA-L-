@@ -27,6 +27,13 @@ Player.prototype.draw = function() {
     this.width,
     this.height
   );
+  if (this.game.framesCounter % 10 == 0) {
+    this.img.frameIndex += 1;
+  }
+
+  if (this.img.frameIndex == this.img.frames) {
+    this.img.frameIndex = 0;
+  }
 };
 
 Player.prototype.setListeners = function() {
@@ -82,13 +89,19 @@ Player.prototype.move = function(coor, v) {
     if (coor === "x") this.x += v * this.v;
     if (coor === "y") this.y += v * this.v;
   } else {
+    this.game.sound.effect3.play()
   }
   if (this.game.checkIfCollision(x, y, this.game.obstacle.mineBlocks)) {
-    alert("Game Over");
+    this.game.sound.effect4.play()
+    this.game.gameOver();
+    
+
   }
   if (this.game.checkIfCollision(x, y, this.game.obstacle.gemBlocks)) {
     this.game.score.incrementScore();
+    this.game.sound.effect.play();
   }
   if (this.game.checkIfCollision(x, y, this.game.obstacle.sandBlocks)) {
+  this.game.sound.effect2.play();
   }
 };

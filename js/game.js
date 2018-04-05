@@ -6,7 +6,10 @@ function Game(canvasId) {
   this.obstacle = new Obstacle(this);
   this.player;
   this.score;
+  this.sound = new Sound(this);
+  this.framesCounter;
   this.reset();
+
   
 }
 
@@ -52,9 +55,14 @@ Game.prototype.checkIfOccupied = function() {
 
 
 Game.prototype.start = function() {
+  // this.sound.track.play()
   this.interval = setInterval(
     function() {
       this.draw();
+      this.framesCounter += 1;
+      if (this.framesCounter >= 1000){
+        this.framesCounter = 0;
+      }
     }.bind(this),
     30
   );
@@ -76,7 +84,11 @@ Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
   this.score = new Score(this);
+  this.sound = new Sound(this);
+  this.obstacle = new Obstacle(this);
+  this.framesCounter = 0;
   this.checkIfOccupied();
+
 };
 
 Game.prototype.draw = function() {
