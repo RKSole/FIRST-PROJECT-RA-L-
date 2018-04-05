@@ -22,11 +22,31 @@ Game.prototype.checkIfCollision = function(x, y, typeObs) {
       40 + y > arr[i][1]*40) 
       {
         collision = true;
-        if (arr === this.obstacle.gemBlocks) {
+        if (arr === this.obstacle.gemBlocks || arr === this.obstacle.sandBlocks) {
           arr.splice(i,1);
         }
       }
    }
+    return collision;
+}
+
+Game.prototype.checkIfOccupied = function() {
+  var collision = false;
+ 
+  this.obstacle.arrObs.forEach(obs => {
+    this.obstacle.sandBlocks.forEach((sand, index) => {      
+      if (
+        obs[0] * 40 < sand[0] * 40 + 40 &&
+        obs[0] * 40 + 40 > sand[0] * 40 &&
+        obs[1] * 40 < sand[1] * 40 + 40 &&
+        40 + obs[1] * 40 > sand[1] * 40
+      ) 
+    {
+      
+      this.obstacle.sandBlocks.splice(index, 1);
+    }
+  });
+});
     return collision;
 }
 
@@ -55,7 +75,8 @@ Game.prototype.gameOver = function() {
 Game.prototype.reset = function() {
   this.background = new Background(this);
   this.player = new Player(this);
-  this.score = new Score(this)
+  this.score = new Score(this);
+  this.checkIfOccupied();
 };
 
 Game.prototype.draw = function() {

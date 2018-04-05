@@ -78,17 +78,17 @@ Player.prototype.move = function(coor, v) {
   var y = this.y;
   if (coor === "x") x += v * this.v;
   if (coor === "y") y += v * this.v;
-  console.log(x,y);
   if (!this.game.checkIfCollision(x, y, this.game.obstacle.rockBlocks)) {
     if (coor === "x") this.x += v * this.v;
     if (coor === "y") this.y += v * this.v;
   } else {
-    console.log("collision");
   }
   if (this.game.checkIfCollision(x, y, this.game.obstacle.mineBlocks)) {
     alert("Game Over");
   }
   if (this.game.checkIfCollision(x, y, this.game.obstacle.gemBlocks)) {
     this.game.score.incrementScore();
+  }
+  if (this.game.checkIfCollision(x, y, this.game.obstacle.sandBlocks)) {
   }
 };

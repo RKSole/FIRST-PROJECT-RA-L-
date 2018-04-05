@@ -11,6 +11,7 @@ function Obstacle(game){
   this.sandBlocks = [];
   this.createSand();
   
+  
 
   this.gridX = 34;
   this.gridY = 16;
@@ -22,7 +23,7 @@ function Obstacle(game){
   ];
   this.numMines = 30;
   this.numGems = 50;
-  this.numRocks = 150;
+  this.numRocks = 100;
   this.numObs = this.numMines + this.numGems + this.numRocks;
 
   this.rockBlocks = [];
@@ -38,26 +39,25 @@ Obstacle.prototype.createAll = function() {
     x = Math.ceil(Math.random() * (this.gridX - 1));
     y = Math.ceil(Math.random() * (this.gridY - 1));
     this.arrObs.push([x, y]);
-    console.log(x,y)
     for (var i = 0; i < this.arrObs.length - 1; i++) {
       if ((this.arrObs[i][0] === x && this.arrObs[i][1] === y) || (x=== 1 && y === 1)) {
-        console.log(x,y)
         this.arrObs.pop();
         break;
       }
     }
   }
-  this.rockBlocks = this.arrObs.splice(0, this.numRocks);
-  this.gemBlocks = this.arrObs.splice(0, this.numGems);
-  this.mineBlocks = this.arrObs.splice(0, this.numMines);
+  
+  this.rockBlocks = this.arrObs.slice(0, this.numRocks);
+  this.gemBlocks = this.arrObs.slice(this.numRocks, this.numGems+this.numRocks);
+  this.mineBlocks = this.arrObs.slice(this.numGems+this.numRocks);
 };
 
 Obstacle.prototype.drawGrid = function() {
-  for (i = 0; i < this.sandBlocks.length; i++) {
+  for (i = 1; i < this.sandBlocks.length; i++) {
     this.game.ctx.drawImage(
       this.imgGrid,
-      this.sandBlocks[i].x,
-      this.sandBlocks[i].y,
+      this.sandBlocks[i][0] * 40,
+      this.sandBlocks[i][1] * 40,
       40,
       40
     );
@@ -92,7 +92,7 @@ Obstacle.prototype.createSand = function() {
 
   for (x = 40; x <= w - 40; x += 40) {
     for (y = 40; y <= h - 40; y += 40) {
-      this.sandBlocks.push({ x: x, y: y });
+      this.sandBlocks.push([x/40, y/40]);
     }
   }
 };
