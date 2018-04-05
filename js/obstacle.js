@@ -12,7 +12,7 @@ function Obstacle(game){
   this.createSand();
   
 
-  this.gridX = 33;
+  this.gridX = 34;
   this.gridY = 16;
   this.arrObs = [
     [

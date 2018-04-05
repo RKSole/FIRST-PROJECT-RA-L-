@@ -6,13 +6,12 @@ function Game(canvasId) {
   this.obstacle = new Obstacle(this);
   this.player;
   this.score;
-  
   this.reset();
   
 }
 
 Game.prototype.checkIfCollision = function(x, y, typeObs) {
-  var arr = this.obstacle.numObs;
+  var arr = typeObs;
   var collision = false;
  
   for (var i = 0; i< arr.length; i++) {
@@ -22,7 +21,10 @@ Game.prototype.checkIfCollision = function(x, y, typeObs) {
       y < arr[i][1]*40 + 40 &&
       40 + y > arr[i][1]*40) 
       {
-        collision = true
+        collision = true;
+        if (arr === this.obstacle.gemBlocks) {
+          arr.splice(i,1);
+        }
       }
    }
     return collision;
@@ -32,9 +34,7 @@ Game.prototype.checkIfCollision = function(x, y, typeObs) {
 Game.prototype.start = function() {
   this.interval = setInterval(
     function() {
-      this.moveAll();
       this.draw();
-      this.checkIfCollision();
     }.bind(this),
     30
   );
@@ -66,6 +66,3 @@ Game.prototype.draw = function() {
   this.score.draw();
 };
 
-Game.prototype.moveAll = function() {
-  this.player.move();
-};
