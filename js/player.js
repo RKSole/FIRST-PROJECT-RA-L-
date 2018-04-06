@@ -94,9 +94,8 @@ Player.prototype.move = function(coor, v) {
   if (this.game.checkIfCollision(x, y, this.game.obstacle.mineBlocks)) {
     this.game.sound.effect4.play()
     this.game.gameOver();
-    
-
   }
+  
   if (this.game.checkIfCollision(x, y, this.game.obstacle.gemBlocks)) {
     this.game.score.incrementScore();
     this.game.sound.effect.play();

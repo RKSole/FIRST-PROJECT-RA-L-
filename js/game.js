@@ -55,7 +55,7 @@ Game.prototype.checkIfOccupied = function() {
 
 
 Game.prototype.start = function() {
-  // this.sound.track.play()
+  this.sound.track.play()
   this.interval = setInterval(
     function() {
       this.draw();

@@ -49,10 +49,15 @@ Obstacle.prototype.createAll = function() {
   
   this.rockBlocks = this.arrObs.slice(0, this.numRocks);
   this.gemBlocks = this.arrObs.slice(this.numRocks, this.numGems+this.numRocks);
-  this.mineBlocks = this.arrObs.slice(this.numGems+this.numRocks);
+  this.mineBlocks = this.arrObs.splice(this.numGems+this.numRocks);
 };
 
 Obstacle.prototype.drawGrid = function() {
+  for (var j = 0; j < this.mineBlocks.length; j++) {
+    var x = this.mineBlocks[j];
+    this.game.ctx.drawImage(this.imgeMine, x[0] * 40, x[1] * 40, 40, 40);
+  }
+  
   for (i = 1; i < this.sandBlocks.length; i++) {
     this.game.ctx.drawImage(
       this.imgGrid,
@@ -80,10 +85,7 @@ Obstacle.prototype.drawGrid = function() {
       40
     );
   }
-  for (var j = 0; j < this.mineBlocks.length; j++) {
-    var x = this.mineBlocks[j];
-    this.game.ctx.drawImage(this.imgeMine, x[0] * 40, x[1] * 40, 40, 40);
-  }
+  
 };
 
 Obstacle.prototype.createSand = function() {
